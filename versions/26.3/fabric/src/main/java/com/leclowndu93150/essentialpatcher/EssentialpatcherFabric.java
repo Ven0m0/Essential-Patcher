@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Properties;
 
 public class EssentialpatcherFabric implements ClientModInitializer {
@@ -54,17 +55,26 @@ public class EssentialpatcherFabric implements ClientModInitializer {
     static void disableEssentialAutoUpdate(String mcVersion) {
         try {
             Path essentialDir = Minecraft.getInstance().gameDirectory.toPath().resolve("essential");
-            Path configFile = essentialDir.resolve("stage2." + mcVersion + ".properties");
-            Properties props = new Properties();
-            if (Files.exists(configFile)) {
-                try (var in = Files.newInputStream(configFile)) {
-                    props.load(in);
+            // stage2 file gates loader updates; essential-loader.properties gates Essential mod version updates
+            Path[] configFiles = {
+                    essentialDir.resolve("loader/stage1/fabric/stage2.fabric_" + mcVersion + ".properties"),
+                    essentialDir.resolve("essential-loader.properties")
+            };
+            for (Path configFile : configFiles) {
+                Properties props = new Properties();
+                if (Files.exists(configFile)) {
+                    try (var in = Files.newInputStream(configFile)) {
+                        props.load(in);
+                    }
                 }
-            }
-            props.setProperty("autoUpdate", "false");
-            Files.createDirectories(essentialDir);
-            try (OutputStream out = Files.newOutputStream(configFile)) {
-                props.store(out, null);
+                props.setProperty("autoUpdate", "false");
+                Files.createDirectories(configFile.getParent());
+                // write then move, so a crash mid-write cannot wipe the loader's other keys
+                Path tmp = configFile.resolveSibling(configFile.getFileName() + ".tmp");
+                try (OutputStream out = Files.newOutputStream(tmp)) {
+                    props.store(out, null);
+                }
+                Files.move(tmp, configFile, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
             }
         } catch (Exception e) {
             System.err.println("[EssentialPatcher] Failed to disable auto-update: " + e.getMessage());

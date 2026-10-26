@@ -8,6 +8,15 @@ import net.minecraft.client.server.IntegratedServer;
 import java.util.Locale;
 import java.util.UUID;
 
+/**
+ * Picks a session_id ingredient + label appropriate for the current connection.
+ * - Essential-hosted world (guest): the host's UUID from the SPS address.
+ * - Multiplayer: ip:port (lowercased).
+ * - Published singleplayer (host): the host's own UUID, matching what guests compute.
+ * - Singleplayer (not published): the world name.
+ *
+ * The CosmeticHttpSync hashes this so the actual server_id we send to the panel is opaque.
+ */
 public final class SessionKey {
     private static final String DEFAULT_PORT_SUFFIX = ":25565";
 

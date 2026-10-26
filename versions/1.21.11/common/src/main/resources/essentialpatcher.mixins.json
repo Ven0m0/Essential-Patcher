@@ -17,6 +17,7 @@
     "render.HumanoidArmorLayerAccessor",
     "render.HumanoidArmorLayerMixin",
     "telemetry.TelemetryManagerMixin",
+    "telemetry.TelemetryGathererMixin",
     "telemetry.ImpressionTelemetryMixin",
     "telemetry.FPSTelemetryMixin",
     "telemetry.FeatureSessionTelemetryMixin",

@@ -67,3 +67,8 @@ desktop.ini
 *~
 libs/essential*.jar
 libs/elementa*.jar
+
+.omc*
+.codegraph/
+.serena/
+.claude/context-archive/

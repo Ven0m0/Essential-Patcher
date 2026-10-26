@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150"
-version = "1.0.10"
+version = providers.gradleProperty("modVersion").getOrElse("1.0.10")
 
 prism {
     curseMaven()
@@ -45,8 +45,8 @@ prism {
         common {
             localJar("libs/essential.jar")
             modCompileOnly("curse.maven:yacl-667299:7437845")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -82,8 +82,8 @@ prism {
         common {
             localJar("libs/essential.jar")
             modCompileOnly("curse.maven:yacl-667299:7437845")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -108,11 +108,11 @@ prism {
             requires("yacl")
         }
         common {
-            localJar("libs/essential-1.21.11.jar")
+            localJar("libs/essential-1.21.9.jar")
             localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7437853")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -124,7 +124,7 @@ prism {
                 disableAutoDetect()
             }
             dependencies {
-                localJar("libs/essential-1.21.11.jar")
+                localJar("libs/essential-1.21.9.jar")
                 modImplementation("curse.maven:yacl-667299:7437852")
                 modCompileOnly("curse.maven:modmenu-308702:7808781")
             }
@@ -139,8 +139,8 @@ prism {
             localJar("libs/essential-1.21.11.jar")
             localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7437853")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -168,8 +168,8 @@ prism {
             localJar("libs/essential-26.1.2.jar")
             localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7904436")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -189,6 +189,7 @@ prism {
     }
 
     version("26.3") {
+        minecraftVersions("26.3")
         publishingDependencies {
             requires("yacl")
         }
@@ -196,8 +197,8 @@ prism {
             localJar("libs/essential-26.3.jar")
             localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:8935498")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -219,8 +220,8 @@ prism {
     version("1.19.2") {
         common {
             localJar("libs/essential-1.19.2.jar")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
@@ -251,8 +252,8 @@ prism {
         common {
             localJar("libs/essential-1.20.1.jar")
             modCompileOnly("curse.maven:yacl-667299:6336646")
-            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
-            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+            compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
             publishingDependencies {
