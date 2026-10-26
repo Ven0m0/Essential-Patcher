@@ -1,7 +1,6 @@
 package com.leclowndu93150.essentialpatcher.httpsync;
 
 import gg.essential.sps.SpsAddress;
-import gg.essential.util.USession;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.server.IntegratedServer;
@@ -26,19 +25,24 @@ public final class SessionKey {
 
     public static String[] compute() {
         Minecraft mc = Minecraft.getInstance();
+        String[] sps = computeEssentialSps(mc);
+        if (sps != null) {
+            return sps;
+        }
+
         ServerData sd = mc.getCurrentServer();
         if (sd != null && sd.ip != null && !sd.ip.isBlank()) {
-            String[] sps = fromEssentialSpsAddress(sd.ip);
-            return sps != null ? sps : new String[] { normalizeAddress(sd.ip), "smp" };
+            return new String[] { normalizeAddress(sd.ip), "smp" };
         }
         IntegratedServer integ = mc.hasSingleplayerServer() ? mc.getSingleplayerServer() : null;
         if (integ != null) {
-            // Essential 1.5+ hosts worlds by publishing the integrated server; guests key on the host UUID,
-            // which Essential takes from its active session (can differ from mc.getUser() after an account switch).
-            if (integ.isPublished()) {
-                return essentialSpsKey(USession.Companion.activeNow().getUuid());
-            }
             String world = integ.getWorldData() != null ? integ.getWorldData().getLevelName() : "world";
+            if (integ.isPublished()) {
+                String host = mc.getUser() != null && mc.getUser().getProfileId() != null
+                        ? mc.getUser().getProfileId().toString()
+                        : "host";
+                return new String[] { host + "|" + world, "lan" };
+            }
             return new String[] { world, "sp" };
         }
         return null;
@@ -50,6 +54,22 @@ public final class SessionKey {
             return null;
         }
         return essentialSpsKey(spsAddress.getHost());
+    }
+
+    private static String[] computeEssentialSps(Minecraft mc) {
+        try {
+            UUID localHost = EssentialSpsSyncListener.localHost();
+            if (localHost != null) {
+                return essentialSpsKey(localHost);
+            }
+
+            ServerData serverData = mc.getCurrentServer();
+            if (serverData != null && serverData.ip != null) {
+                return fromEssentialSpsAddress(serverData.ip);
+            }
+        } catch (Exception | LinkageError ignored) {
+        }
+        return null;
     }
 
     private static String normalizeAddress(String address) {

@@ -2,6 +2,7 @@ package com.leclowndu93150.essentialpatcher;
 
 import com.leclowndu93150.essentialpatcher.config.PatcherConfig;
 import com.leclowndu93150.essentialpatcher.httpsync.CosmeticHttpSync;
+import com.leclowndu93150.essentialpatcher.httpsync.EssentialSpsSyncListener;
 import com.leclowndu93150.essentialpatcher.httpsync.SessionKey;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -19,6 +20,7 @@ public class EssentialpatcherFabric implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        EssentialVersion.require("1.5.1");
         PatcherConfig config = PatcherConfig.get();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
@@ -43,6 +45,7 @@ public class EssentialpatcherFabric implements ClientModInitializer {
                 return Minecraft.getInstance().getUser().getProfileId();
             }
         });
+        EssentialSpsSyncListener.register();
 
         if (config.disableAutoUpdate) {
             disableEssentialAutoUpdate("1.21.11");

@@ -47,6 +47,14 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v6
 
+      - name: Fetch Elementa 774
+        run: |
+          set -euo pipefail
+          mkdir -p libs
+          curl -fsSL --retry 3 -o libs/elementa-774.jar \
+            https://repo.essential.gg/repository/maven-public/gg/essential/elementa/774/elementa-774.jar
+          echo "765831f7fb38e557cd828f9180937a0514a8efe103ab4b9ca0902aa663ddfa14  libs/elementa-774.jar" | sha256sum --check
+
       # Essential is never committed or redistributed (LEGALITY.md). Fetch it from Essential's
       # own update endpoint and verify the published checksum before compiling against it.
       - name: Fetch Essential ${{ matrix.essential_platform }}

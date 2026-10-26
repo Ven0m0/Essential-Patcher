@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150"
-version = providers.gradleProperty("modVersion").getOrElse("1.0.9")
+version = providers.gradleProperty("modVersion").getOrElse("1.0.10")
 
 prism {
     curseMaven()
@@ -17,7 +17,7 @@ prism {
 
     publishing {
 
-        changelog = "added 26.3 (Fabric); 1.21.11 and 26.3 now target Essential 1.5.1 (fixed the startup crash, retargeted telemetry, notice and shader glint patches, cosmetic sync for hosted worlds); fixed shader glint corruption with particle cosmetics and skins reverting to a default skin; 1.21.2 and 1.21.9 jars now tagged for 1.21.3-1.21.8 and 1.21.10; added Hide Menu Paperdoll, Hide Essential Cosmetics and Show Delisted Cosmetics; Disable auto-update now writes the files Essential actually reads; fixed cosmetic sync stalling after a quick rejoin"
+        changelog = "fixed the game crashing on startup with Essential 1.5.1, fixed the shader glint fix with Essential 1.5.1, Disable Telemetry now also blocks shared-world telemetry, Fabric API is now listed as required, now requires Essential 1.5.1 (1.4.1.1 on 1.21.2, 1.21.3, 1.21.5-1.21.7 and 1.21.9)"
         curseforge {
             accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
             projectId = "1555663"
@@ -49,6 +49,9 @@ prism {
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.18.6"
             fabricApi("0.116.10+1.21.1")
             mixins {
@@ -83,6 +86,9 @@ prism {
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.18.6"
             fabricApi("0.106.1+1.21.2")
             mixins {
@@ -103,11 +109,15 @@ prism {
         }
         common {
             localJar("libs/essential-1.21.9.jar")
+            localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7437853")
             compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.18.6"
             fabricApi("0.134.1+1.21.9")
             mixins {
@@ -127,11 +137,15 @@ prism {
         }
         common {
             localJar("libs/essential-1.21.11.jar")
+            localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7437853")
             compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.18.6"
             fabricApi("0.141.4+1.21.11")
             mixins {
@@ -152,11 +166,15 @@ prism {
         }
         common {
             localJar("libs/essential-26.1.2.jar")
+            localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:7904436")
             compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.18.6"
             fabricApi("0.149.1+26.1.2")
             mixins {
@@ -177,13 +195,17 @@ prism {
         }
         common {
             localJar("libs/essential-26.3.jar")
+            localJar("libs/elementa-774.jar")
             modCompileOnly("curse.maven:yacl-667299:8935498")
             compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
-            loaderVersion = "0.18.6"
-            fabricApi("0.161.0+26.3")
+            publishingDependencies {
+                requires("fabric-api")
+            }
+            loaderVersion = "0.19.5"
+            fabricApi("0.162.0+26.3")
             mixins {
                 disableAutoDetect()
             }
@@ -202,6 +224,9 @@ prism {
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.16.14"
             fabricApi("0.77.0+1.19.2")
             mixins {
@@ -231,6 +256,9 @@ prism {
             compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
         }
         fabric {
+            publishingDependencies {
+                requires("fabric-api")
+            }
             loaderVersion = "0.16.14"
             fabricApi("0.92.3+1.20.1")
             mixins {

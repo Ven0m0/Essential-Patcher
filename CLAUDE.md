@@ -57,8 +57,10 @@ in `config/PatcherConfig*` (1.19.2 has no YACL, so its config button opens
   gitignored). Put them in `libs/` before building: `essential-1.19.2.jar`, `essential-1.20.1.jar`,
   `essential.jar` (1.21.1, 1.21.2), `essential-1.21.9.jar` (1.21.9, Essential 1.4.1.1),
   `essential-1.21.11.jar` (1.21.11, Essential 1.5.1),
-  `essential-26.1.2.jar`, `essential-26.3.jar` (Essential 1.5.1).
-- Required Essential version is in `README.md` (1.5.1 for 1.21.11 and 26.3, 1.4.1.1 elsewhere).
+  `essential-26.1.2.jar`, `essential-26.3.jar` (Essential 1.5.1). Builds for 1.21.9 and newer also
+  need `elementa-774.jar` from Essential's Maven repository.
+- Required Essential version is in `README.md` (1.5.1 except on Minecraft versions Essential no
+  longer updates, which use 1.4.1.1).
 - Other deps (YACL, Mod Menu, Essential runtime) come from CurseForge Maven via `curse.maven:*`.
 - Mod `version` and the publish `changelog` string live in `build.gradle.kts`; keep `CHANGELOG.md`
   in sync. Publishing reads `CURSEFORGE_TOKEN` / `MODRINTH_TOKEN` from the environment.
