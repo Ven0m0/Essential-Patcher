@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 Essential Patcher: a client-side Minecraft mod that patches the Essential mod at runtime with Mixins
 (cosmetic unlock, telemetry/ads/purchase blocking), plus a small Python cosmetic-sync server.
